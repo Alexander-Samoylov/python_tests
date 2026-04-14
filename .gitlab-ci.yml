@@ -1,0 +1,35 @@
+stages:
+  - test
+  - report
+
+variables:
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  PIP_NO_CACHE_DIR: "1"
+
+tests:
+  stage: test
+  image: python:3.12-slim
+  before_script:
+    - python -V
+    - pip install -r requirements.txt
+    - pip install -e .
+  script:
+    - pytest -q --alluredir=allure-results
+  artifacts:
+    when: always
+    paths:
+      - allure-results
+    expire_in: 7 days
+
+allure_report:
+  stage: report
+  image: qameta/allure:2.29.0
+  needs: ["tests"]
+  script:
+    - allure generate allure-results -o allure-report --clean
+  artifacts:
+    when: always
+    paths:
+      - allure-report
+    expire_in: 7 days
+
