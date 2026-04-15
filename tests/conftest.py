@@ -1,3 +1,5 @@
+"""Pytest fixtures for Binance public API tests."""
+
 import os
 
 import allure
@@ -28,4 +30,3 @@ def binance_cfg() -> BinanceConfig:
 @pytest.fixture(scope="session")
 def binance(binance_cfg: BinanceConfig) -> BinancePublicClient:
     return BinancePublicClient(binance_cfg)
-

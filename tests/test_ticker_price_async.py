@@ -1,3 +1,5 @@
+"""Tests for Binance `/api/v3/ticker/price` public endpoint with concurrency demo."""
+
 import asyncio
 
 import allure
@@ -12,11 +14,14 @@ async def _ticker_price_async(binance, symbol: str):
 @allure.epic("Binance: публичные API")
 @allure.feature("Рыночные данные")
 @allure.story("Тикер цены (параллельные запросы)")
-@allure.title("Параллельный fan-out запросов цен по нескольким символам (asyncio + threads)")
+@allure.title(
+    "Параллельный fan-out запросов цен по нескольким символам (asyncio + threads)"
+)
 @allure.description(
-    "Демонстрация асинхронности: делаем несколько запросов `GET /api/v3/ticker/price` параллельно через "
-    "`asyncio.gather`, используя `asyncio.to_thread` для выполнения блокирующего `requests` в пуле потоков. "
-    "Проверяем статус 200 и базовую схему ответа для каждого символа."
+    "Демонстрация асинхронности: делаем несколько запросов `GET /api/v3/ticker/price` "
+    "параллельно через `asyncio.gather`, используя `asyncio.to_thread` для выполнения "
+    "блокирующего `requests` в пуле потоков. Проверяем статус 200 и базовую схему ответа "
+    "для каждого символа."
 )
 @pytest.mark.asyncio
 async def test_ticker_price_parallel(binance):
@@ -37,4 +42,3 @@ async def test_ticker_price_parallel(binance):
             assert "price" in r.json
             assert isinstance(r.json["price"], str)
             assert float(r.json["price"]) > 0.0
-

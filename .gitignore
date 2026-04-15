@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Build / packaging
+*.egg-info/
+dist/
+build/
+
+# Allure
+allure-results/
+allure-report/
+

@@ -1,3 +1,5 @@
+"""Tests for Binance `/api/v3/time` public endpoint."""
+
 import allure
 
 
@@ -21,4 +23,3 @@ def test_server_time_ok(binance):
         assert "serverTime" in r.json
         assert isinstance(r.json["serverTime"], int)
         assert r.json["serverTime"] > 0
-

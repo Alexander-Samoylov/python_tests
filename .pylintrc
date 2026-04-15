@@ -1,0 +1,15 @@
+[MAIN]
+py-version=3.12
+jobs=0
+
+[MASTER]
+ignore-patterns=^allure-results/.*,^allure-report/.*
+
+[FORMAT]
+max-line-length=100
+
+[MESSAGES CONTROL]
+disable=
+    missing-function-docstring,
+    redefined-outer-name
+

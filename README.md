@@ -54,6 +54,20 @@ allure generate allure-results -o allure-report --clean
 allure open allure-report
 ```
 
+## Линтинг (pylint)
+
+Установить dev-зависимости:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+Проверить тесты:
+
+```bash
+python -m pylint tests/
+```
+
 ## Запуск через Docker
 
 Сборка:

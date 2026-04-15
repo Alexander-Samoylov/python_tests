@@ -1,3 +1,5 @@
+"""Tests for Binance `/api/v3/exchangeInfo` public endpoint."""
+
 import allure
 
 
@@ -41,4 +43,3 @@ def test_exchange_info_trading_symbols_extractable(binance):
     with allure.step("Проверяем, что контрольная пара BTCUSDT торгуется"):
         assert isinstance(trading, list)
         assert "BTCUSDT" in trading
-

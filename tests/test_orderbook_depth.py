@@ -1,3 +1,5 @@
+"""Tests for Binance `/api/v3/depth` (order book) public endpoint."""
+
 import allure
 import pytest
 
@@ -15,7 +17,9 @@ def test_depth_shape(binance, symbol, limit):
     allure.dynamic.parameter("symbol", symbol)
     allure.dynamic.parameter("limit", limit)
 
-    with allure.step(f"Отправляем запрос `GET /api/v3/depth` (symbol={symbol}, limit={limit})"):
+    with allure.step(
+        f"Отправляем запрос `GET /api/v3/depth` (symbol={symbol}, limit={limit})"
+    ):
         r = binance.depth(symbol=symbol, limit=limit)
 
     with allure.step("Проверяем HTTP статус и наличие ключей"):
@@ -40,4 +44,3 @@ def test_depth_shape(binance, symbol, limit):
                 price, qty = level
                 assert isinstance(price, str)
                 assert isinstance(qty, str)
-
